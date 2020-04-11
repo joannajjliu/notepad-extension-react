@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 import 'normalize.css/normalize.css';
-import './App.css';
+import './styles/styles.css';
 
 import IndecisionApp from './components/IndecisionApp.js';
 

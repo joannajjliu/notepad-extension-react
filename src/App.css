@@ -1,26 +1,3 @@
-.html, body {
-  font-size: 62.5%;
-  min-height: 180px;
-  width: 384px;
-  padding: 15px;
-}
-
-.App {
-  text-align: center;
-}
-
-.header {
-  margin-top: 0;
-}
-
-.option__text {
-  display: inline-block;
-}
-
-.button--link {
-  display: inline-block;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
