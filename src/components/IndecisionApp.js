@@ -46,6 +46,35 @@ export default class IndecisionApp extends React.Component {
             })
         );
     };
+    onDragStart = (e, index) => {
+        console.log("onDragStart e.dataTransfer: ", e.dataTransfer);
+        this.draggedItem = this.state.options[index];
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/html", e.target.parentNode);
+        e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
+        // setTimeout(() => {
+        //     this.draggedItem.display = "none";
+        // }, 0);
+    };
+    onDragOver = (index) => {
+        const draggedOverItem = this.state.options[index];
+
+        //if item is dragged over itself, ignore
+        if (this.draggedItem === draggedOverItem) {
+            return;
+        }
+
+        //filter out currently dragged item
+        let options = this.state.options.filter(option => option !== this.draggedItem);
+        
+        // add the dragged item after the dragged over item
+        options.splice(index, 0, this.draggedItem);
+
+        this.setState({ options });
+    };
+    onDragEnd = () => {
+        this.draggedItem = null;
+    };
     componentDidMount() { //localStorage: fetch data
         try {
             const json = localStorage.getItem("options");
@@ -76,12 +105,15 @@ export default class IndecisionApp extends React.Component {
         return (
             <div className="App">
                 <Header subtitle={subtitle}/>
-                    <div className="">
+                    <div>
                         <Options
                             options={this.state.options}
                             handleDeleteOptions={this.handleDeleteOptions}
                             handleDeleteOption={this.handleDeleteOption}
                             updateOptionValue={this.updateOptionValue}
+                            onDragStart={this.onDragStart}
+                            onDragOver={this.onDragOver}
+                            onDragEnd={this.onDragEnd}
                         />
                         <AddOption 
                             handleAddOption={this.handleAddOption}

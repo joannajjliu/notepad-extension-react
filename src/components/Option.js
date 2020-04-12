@@ -11,16 +11,19 @@ export default class Option extends React.Component {
         isInEditMode: false,
         value: ""
     };
+
     changeEditMode = () => {
         this.setState((prevState) => ({
             isInEditMode: !prevState.isInEditMode
         }));
     };
+
     closeEditMode = () => {
         this.setState({
             isInEditMode: false
         })
     };
+
     updateComponentValue = () => {
         this.setState({
             isInEditMode: false,
@@ -28,6 +31,7 @@ export default class Option extends React.Component {
         });
         this.props.updateOptionValue((this.props.count - 1), this.myRef.current.value);
     };
+
     renderEditView = () => {
         return (
             <div>
@@ -41,16 +45,37 @@ export default class Option extends React.Component {
             </div>
         )
     };
+    
     renderDefaultView = () => {
         return (
             <p className="option__text">
-                {this.props.count}. {this.props.optionText}
+                {this.props.optionText}
             </p>
         )
     };
+
+    // dragStart = (e) => {
+    //     const target = e.target;
+
+    //     e.dataTransfer.setData('card_id', target.id);
+    //     setTimeout(() => {
+    //         target.style.display = "none";
+    //     }, 0);
+    // };
+
+    // dragOver = (e) => {
+    //     e.stopPropagation();
+    // };
+
     render() {
         return (
-            <div className="option">
+            <div
+                className="card"
+                // id={this.props.id}
+                // onDragStart={this.dragStart}
+                // onDragOver={this.dragOver}
+                // draggable="true"
+            >
                 {this.state.isInEditMode ? 
                     this.renderEditView()
                     :
